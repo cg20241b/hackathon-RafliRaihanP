@@ -76,11 +76,12 @@ fontLoader.load(
           // Specular (Plastic)
           vec3 viewDir = normalize(-vPosition);
           vec3 reflectDir = reflect(-lightDir, vNormal);
-          float spec = pow(max(dot(viewDir, reflectDir), 0.0), 16.0); // Lower shininess for plastic
+          float spec = pow(max(dot(viewDir, reflectDir), 0.0), 20.0); // Lower shininess for plastic
 
           // Combine
           vec3 color = vec3(0.674, 0.898, 0.078); // #ace514 for alphabet
-          gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(vec3(1.0) * spec, 1.0);
+          // gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(vec3(1.0) * spec, 1.0);
+          gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(color * spec, 1.0);
         }
       `,
     });
@@ -125,11 +126,12 @@ fontLoader.load(
           // Specular (Metal)
           vec3 viewDir = normalize(-vPosition);
           vec3 reflectDir = reflect(-lightDir, vNormal);
-          float spec = pow(max(dot(viewDir, reflectDir), 0.0), 64.0); // Higher shininess for metal
+          float spec = pow(max(dot(viewDir, reflectDir), 0.0), 64.0); 
 
           // Combine
-          vec3 color = vec3(0.302, 0.082, 0.902); // #4D14E5 for digit
-          gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(color * spec, 1.0); // Specular matches the base color
+          vec3 color = vec3(0.302, 0.078, 0.898); // #4D14E5 for digit
+          // gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(color * spec, 1.0); 
+          gl_FragColor = vec4(color * (ambient + diffuse), 1.0) + vec4(vec3(1.0) * spec, 1.0);
         }
       `,
     });
